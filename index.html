@@ -1,0 +1,44 @@
+ <!DOCTYPE>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
+		<link rel = "stylesheet" type = "text/css" href = "format.css">   <!-- Link to style sheet named format.css -->
+		<script type="text/javascript" src="cordova.js"></script> 
+        <script type="text/javascript" src="js/index.js"></script>
+        <title>Office Control</title>
+    </head>
+	
+	<body onload="onLoad()">
+		<h1>Office Control</h1>
+        <!--Leander-->   
+		<ul id = "bleDeviceList"> </ul>  
+		<button id = "refreshButton" onClick = "refreshDeviceList()">Refresh</button>
+		<br>
+		<div id = "statusDiv">Status: Disconnected</div>
+		<div id = "bleId">DeviceId:</div>
+		<div id = "debugDiv"></div>
+		<br><br>
+		<b>Light control </b>
+		<br>
+		<!-- Gruppe 11-->
+		<button id = "onoffled" onclick = "data(1)" >On/Off</button>
+		<br><br><br>
+		<b>Gardiner</b>
+		<br>
+		<!--Office Control-->
+		<button id = "gardup" onclick = "data(2)" >Up</button>
+		<br><br>
+		<button id = "garddown" onclick = "data(3)" >Down</button>
+		<br><br>
+		<button id = "gardstop" onclick = "data(4)" >Stop</button>
+		<br><br><br>
+		<b>Bluetooth connection</b>
+		<br>
+		<button id = "disconnectButton" onclick = "disconnect()">Disconnect</button>
+		<div id = "receiveDiv"></div>
+	</body>
+</html>
