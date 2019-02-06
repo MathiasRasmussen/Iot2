@@ -35,8 +35,8 @@ var blue =
 }
 
 var ConnDeviceId;
-
-var deviceList =[/*Leander*/];
+/*Leander*/
+var deviceList =[];
  
 function onLoad()
 {
@@ -112,6 +112,10 @@ function onConnError()
 	document.getElementById("receiveDiv").innerHTML =  "Received: " + bytesToString(data) + "<br/>";
 }
 
+function data(txt)
+{
+	messageInput.value = txt;
+}	
 
 function data(1) 
 { // send data to Arduino

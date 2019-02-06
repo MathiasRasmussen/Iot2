@@ -12,8 +12,8 @@
 #include "BluefruitConfig.h" //Bruger den anden fil (config.h)
 
 const int LEDpin = 5;
-const int motorpin1 = 6;
-const int motorpin2 = 9;
+int motorpin1 = 6;
+int motorpin2 = 9;
 #if SOFTWARE_SERIAL_AVAILABLE
 #include <SoftwareSerial.h>
 #endif
@@ -102,7 +102,7 @@ void setup(void)
   }
 
   //Give module a new name
-  ble.println("AT+GAPDEVNAME=DEERGOD"); // named DEERGOD
+  ble.println("AT+GAPDEVNAME=office"); // named office
 
   // Check response status
   ble.waitForOK();
@@ -178,21 +178,26 @@ void loop(void)
       message = "";
       Serial.println("Rolling curtins down");
       digitalWrite(motorpin1, HIGH);
-      digitalWrite(moterpin2, LOW);
-      stop(10000);
+      digitalWrite(motorpin2, LOW);
+      delay(10000);
+      digitalWrite(motorpin1, LOW);
+      break;
     }
     else if (message == "3")
     {
       Serial.println("Rolling curtins up");
       digitalWrite(motorpin1, LOW);
-      digitalWrite(moterpin2, HIGH);
-      stop(10000);
+      digitalWrite(motorpin2, HIGH);
+      delay(10000);
+      digitalWrite(motorpin2, LOW);
+      break;
     }
     else if (message == "4")
     {
       Serial.println("Stopping curtins");
       digitalWrite(motorpin1, LOW);
-      digitalWrite(moterpin2, LOW);
+      digitalWrite(motorpin2, LOW);
+      break;
     }
     else
     {
