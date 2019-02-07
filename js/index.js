@@ -72,11 +72,13 @@ function onDiscoverDevice(device)
 {
 	//Tilgængelige bluetooth signaler
 	//Make a list in html and show devises
+	if(device.name == "office")
+	{
 	var listItem = document.createElement('li'),
 	html = device.name+ "," + device.id;
 	listItem.innerHTML = html;
 	document.getElementById("bleDeviceList").appendChild(listItem);
-	
+	}
 }
 
 
