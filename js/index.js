@@ -38,7 +38,7 @@ var ConnDeviceId;
 /*Leander*/
 var deviceList =[];
  
-function start()
+function onLoad()
 {
 	document.addEventListener('deviceready', onDeviceReady, false);
     bleDeviceList.addEventListener('touchstart', conn, false); // assume not scrolling
