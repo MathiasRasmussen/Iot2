@@ -38,7 +38,7 @@ var ConnDeviceId;
 /*Leander*/
 var deviceList =[];
  
-function onLoad()
+function start()
 {
 	document.addEventListener('deviceready', onDeviceReady, false);
     bleDeviceList.addEventListener('touchstart', conn, false); // assume not scrolling
@@ -112,41 +112,12 @@ function onConnError()
 	document.getElementById("receiveDiv").innerHTML =  "Received: " + bytesToString(data) + "<br/>";
 }
 
-function data(txt)
-{
-	messageInput.value = txt;
-}	
 
-function data(1) 
+function data(txt) 
 { // send data to Arduino
-	var data = stringToBytes ("1");
+	var data = stringToBytes (txt);
 	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.txCharacteristic, data, onSend, onError);
 }
-
-function data(2) 
-{ // send data to Arduino
-	var data = stringToBytes ("2");
-	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.txCharacteristic, data, onSend, onError);
-}
-
-function data(3) 
-{ // send data to Arduino
-	var data = stringToBytes ("3");
-	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.txCharacteristic, data, onSend, onError);
-}
-
-function data(4) 
-{ // send data to Arduino
-	var data = stringToBytes ("4");
-	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.txCharacteristic, data, onSend, onError);
-}
-
-function data(5) 
-{ // send data to Arduino
-	var data = stringToBytes ("5");
-	ble.writeWithoutResponse(ConnDeviceId, blue.serviceUUID, blue.txCharacteristic, data, onSend, onError);
-}
-
 
 function onSend()
 {

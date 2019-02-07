@@ -7,12 +7,12 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
 		<link rel = "stylesheet" type = "text/css" href = "format.css">   <!-- Link to style sheet named format.css -->
-		<script type="text/javascript" src="cordova.js"></script> 
+	<!--	<script type="text/javascript" src="cordova.js"></script> -->
         <script type="text/javascript" src="js/index.js"></script>
         <title>Office Control</title>
     </head>
 	
-	<body onload="onLoad()">
+	<body onload = "start()" align = "center">
 	
 		<h1>Office Control</h1>
     
@@ -27,16 +27,16 @@
 		<b>Light control </b>
 		<br>
 		<!-- Gruppe 11-->
-		<button id = "onoffled" onclick = "data(1)" >On/Off</button>
+		<button id = "onoffled" onclick = 'data("1")' >On/Off</button>
 		<br><br><br>
-		<b>Gardiner</b>
+		<b>Curtins</b>
 		<br>
 		<!--Office Control-->
-		<button id = "gardup" onclick = "data(2)" >Up</button>
+		<button id = "curtinsup" onclick = 'data("2")' >Up</button>
 		<br><br>
-		<button id = "garddown" onclick = "data(3)" >Down</button>
+		<button id = "curtinsdown" onclick = 'data("3")' >Down</button>
 		<br><br>
-		<button id = "gardstop" onclick = "data(4)" >Stop</button>
+		<button id = "curtinsstop" onclick = 'data("4")' >Stop</button>
 		<br><br><br>
 		<div id="sendDiv"></div>
 		<br>

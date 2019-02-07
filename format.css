@@ -1,40 +1,51 @@
-body{
-	background-color: green;
-}	
-img{
-	width: 100%;	
+body 
+{
+    background-image:url("985970cddd05b00.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	font-family: Arial;
 }
 
-/* The content div soround
-  * every thing in the body
-  * The css make content  smaller than the body itself
-  * and centret.
-  */
-#content {
-	width: 75%;
-	margin: auto;
+h1 
+{
+  color: gold;
+  text-align: center;
 }
-
-#bleDeviceList{
-	
-}	
-#messageInput{
-	
+#refreshButton
+{
+	height: 50px;
+	width: 120px;
 }
-#list{
-	background-color: red;
+#onoffled
+{
+	height: 50px;
+	width: 120px;
 }
-
-/* width will be 100% of content */
-#refreshButton{
-	width: 100%;
+#curtinsup
+{
+	height: 50px;
+	width: 120px;
 }
-#sendButton{
-	width: 100%;
+#curtinsdown
+{
+	height: 50px;
+	width: 120px;
 }
-#ledOnButton{
-	width: 100%;
+#curtinsstop
+{
+	height: 50px;
+	width: 120px;
 }
-#ledOffButton{
-	width: 100%;
+#disconnectButton
+{
+	height: 50px;
+	width: 120px;
+}
+b
+{
+	color: gold;
+}
+div
+{
+	color: gold;
 }
