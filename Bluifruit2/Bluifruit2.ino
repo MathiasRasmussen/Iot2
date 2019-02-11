@@ -10,16 +10,9 @@
 #include "Adafruit_BluefruitLE_UART.h"
 
 #include "BluefruitConfig.h" //Bruger den anden fil (config.h)
-
-// The value will quickly become too large for an int to store
-unsigned long previousMillis = 0;
-unsigned long previousMillis1 = 0;
-// constants won't change:
-const long interval = 10000;
-
-const int LEDpin = 5;
 int motorpin1 = 6;
 int motorpin2 = 9;
+const int LEDpin = 5;
 #if SOFTWARE_SERIAL_AVAILABLE
 #include <SoftwareSerial.h>
 #endif
@@ -55,9 +48,11 @@ void error(const __FlashStringHelper*err)
 /**************************************************************************/
 void setup(void)
 {
+  // put your setup code here, to run once:
+   pinMode(motorpin1, OUTPUT);
+   pinMode(motorpin2, OUTPUT);
+   Serial.begin(9600);
   pinMode (LEDpin, OUTPUT); //Sætter LEDpin (som er 5) til output
-  pinMode(motorpin1, OUTPUT);
-  pinMode(motorpin2, OUTPUT);
   while (!Serial);  // required for Flora & Micro
   delay(500);
 
@@ -108,7 +103,7 @@ void setup(void)
   }
 
   //Give module a new name
-  ble.println("AT+GAPDEVNAME=office"); // named office
+  ble.println("AT+GAPDEVNAME=office"); // named DEERGOD
 
   // Check response status
   ble.waitForOK();
@@ -131,14 +126,12 @@ void setup(void)
 */
 /**************************************************************************/
 int state = 0;
-String message = "";
 void loop(void)
 {
-  unsigned long currentMillis = millis();
   // Check for user input
   char n, inputs[BUFSIZE + 1];
 
-/*  if (Serial.available())
+  if (Serial.available())
   {
     n = Serial.readBytes(inputs, BUFSIZE);
     inputs[n] = 0;
@@ -148,75 +141,67 @@ void loop(void)
 
     // Send input data to host via Bluefruit
     ble.print(inputs);
-  }*/
-  if (ble.available())
-  {
+  }
+  if (ble.available()) {
     Serial.print("* "); Serial.print(ble.available()); Serial.println(F(" bytes available from BTLE"));
   }
   // Echo received data
-
+  String message = "";
   while ( ble.available() )
   {
-
     int c = ble.read();
     Serial.print((char)c);
     //Få knappen til at sende signal
     message.concat((char)c);
-  }
-  Serial.print("message: ");
-  Serial.println(message);
-  if (message == "1")
-  {
-    if (state == 0)
+
+    //Serial.print("message: ");
+    //Serial.println(message);
+    if (message == "1")
     {
-      Serial.println("Turning LED ON");
-      digitalWrite(LEDpin, HIGH);
-      state = 1;
+      if (state == 0)
+      {
+        message = "";
+        Serial.println("\nTurning LED ON");
+        digitalWrite(LEDpin, HIGH);
+        state = 1;
+      }
+      else
+      {
+        message = "";
+        Serial.println("\nTurning LED OFF");
+        digitalWrite(LEDpin, LOW);
+        state = 0;
+      }
+    }
+    else if (message == "2")
+    {
+      Serial.println("Rolling curtins Up");
+      digitalWrite(motorpin1, HIGH);
+      digitalWrite(motorpin2, LOW);
+      delay (10000);
+      digitalWrite(motorpin1, LOW);
+      Serial.println("Rolling curtins Up - Stop");
+    }
+    else if (message == "3")
+    {
+      Serial.println("Rolling curtins Down");
+      digitalWrite(motorpin1, LOW);
+      digitalWrite(motorpin2, HIGH);
+      delay (10000);
+      digitalWrite(motorpin2, LOW);
+      Serial.println("Rolling curtins Down - Stop");
+    }
+    else if (message == "4")
+    {
+      Serial.println("Stopping curtins");
+      digitalWrite(motorpin1, LOW);
+      digitalWrite(motorpin2, LOW);
+      message = "";
     }
     else
     {
-      Serial.println("Turning LED OFF");
-      digitalWrite(LEDpin, LOW);
-      state = 0;
-    }
-        message = "";
-  }
-  if (message == "2")
-  {
-    Serial.println("Rolling curtains down");
-    digitalWrite(motorpin1, HIGH);
-    digitalWrite(motorpin2, LOW);
-    if (currentMillis - previousMillis >= interval)
-    {
-      previousMillis = currentMillis;
-      digitalWrite(motorpin1, LOW);
-      Serial.println("Rolling curtains down - STOP");
       message = "";
     }
   }
-  if (message == "3")
-  {
-    Serial.println("Rolling curtains up");
-    digitalWrite(motorpin1, LOW);
-    digitalWrite(motorpin2, HIGH);
-    if (currentMillis - previousMillis1 >= interval)
-    {
-      previousMillis1 = currentMillis;
-      digitalWrite(motorpin2, LOW);
-      Serial.println("Rolling curtains up - STOP");
-      message = "";
-    }
-  }
-  if (message == "4")
-  {
-    Serial.println("Stopping curtains");
-    digitalWrite(motorpin1, LOW);
-    digitalWrite(motorpin2, LOW);
-    message = "";
-  }
-if (message != "1" && message != "2" && message != "3" && message != "4")
-{
-  message = "";
-  }
-
+  delay(1000);
 }
